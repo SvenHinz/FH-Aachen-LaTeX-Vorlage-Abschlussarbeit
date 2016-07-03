@@ -1,0 +1,196 @@
+\documentclass[12pt,a4paper]{scrreprt}
+
+% Paket für Umlaute:
+\usepackage[utf8]{inputenc}       % Cross Platform
+%\usepackage[ansinew]{inputenc}   % Windows
+%\usepackage[latin1]{inputenc}    % Linux
+%\usepackage[applemac]{inputenc}  % Mac
+
+\usepackage[ngerman]{babel}       % Sprache: deutsch
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{kpfonts}
+\usepackage[left=2cm,right=2cm,top=2.5cm,bottom=2.5cm]{geometry}
+
+\author{Sven Hinz} % --> Eigenen Namen einfügen
+
+\usepackage[plainheadsepline,headsepline]{scrpage2}
+\usepackage{color}
+\usepackage{setspace}
+\usepackage[numbers,square]{natbib}
+\usepackage{longtable}
+\usepackage{listings}
+\usepackage{rotating}
+\usepackage{pdfpages}
+\usepackage{caption}
+\usepackage{subcaption}
+\parindent 0pt
+\usepackage{booktabs}
+\usepackage[export]{adjustbox}
+
+
+% Schriftart
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\setkomafont{chapter}{\sffamily \large}
+\setkomafont{section}{\sffamily \normalsize}
+\setkomafont{subsection}{\sffamily \normalsize}
+\setkomafont{subsubsection}{\sffamily \normalsize}
+\addtokomafont{caption}{\sffamily \small}
+\usepackage{courier}
+
+% Abstand zwischen Kopfzeile und Kapitelüberschrift
+\renewcommand*{\chapterheadstartvskip}{\vspace*{-1.5\baselineskip}}
+
+% Einstellungen der Kopf- und Fußzeile
+\pagestyle{scrheadings}
+\ihead[\sffamily \bfseries \upshape \headmark]{\sffamily \bfseries \upshape \headmark}
+\chead[]{}
+\ohead[]{}
+\ifoot[]{}
+\cfoot[]{}
+\ofoot[\sffamily \pagemark]{\sffamily \pagemark}
+\automark[]{chapter}
+\renewcommand*{\chapterheadendvskip}{\vspace*{1\baselineskip}}
+
+% Formeln
+\usepackage{fleqn} % linksbündig
+\setlength{\mathindent}{1.5cm} % Einrücktiefe
+
+% Tabellen
+\usepackage{multirow} % mehrzeiliger Text in einer Spalte
+\renewcommand{\arraystretch}{2} % Zeilenabstand vergrößern
+\setlength{\doublerulesep}{0.1mm} % Abstand der Doppellinien verkleinern
+\usepackage{tabu}
+\newcolumntype{C}{>{\centering\arraybackslash$}p{3cm}<{$}}
+
+% Quellcode / Kommandozeileneingabe
+\lstdefinestyle{BashInputStyle}{
+  language=bash,
+  basicstyle=\small\ttfamily,
+  %numbers=left,
+  %numberstyle=\tiny,
+  %numbersep=3pt,
+  frame=tb,
+  columns=fullflexible,
+  %backgroundcolor=\color{yellow!20},
+  linewidth=0.9\linewidth,
+  xleftmargin=0.1\linewidth
+}
+
+% Inhalt
+\renewcaptionname{ngerman}{\contentsname}{Inhalt} % Umbenennung in Inhalt
+
+% Quellenverzeichnis
+\renewcaptionname{ngerman}{\bibname}{Quellenverzeichnis} % Umbenennung in Quellenverzeichnis
+
+\usepackage[
+  tocindentmanual,
+  tocflat,
+  tocbreaksstrict,
+  toctextentriesleft,
+]{tocstyle}
+
+% Abkürzungsverzeichnis
+%\usepackage[intoc]{nomencl}
+%\let\abbrev\nomenclature
+%\renewcommand{\nomname}{Abkürzungsverzeichnis}
+%\setlength{\nomlabelwidth}{.25\hsize}
+%\renewcommand{\nomlabel}[1]{#1 \dotfill}
+%\setlength{\nomitemsep}{-\parsep}
+%\makenomenclature
+
+\usepackage[]{acronym}
+
+\begin{document}
+\setstretch{1.25}
+\addtocontents{toc}{\linespread{1}}
+
+\begin{titlepage}
+	%ab hier kleinere Raender, mehr bedruckbare Flaeche.
+
+	\thispagestyle{empty}
+	\newgeometry{a4paper, portrait, left=0cm, right=0cm, top=4cm, bottom=0cm, includefoot}
+
+	% FH Logo
+	%\begin{flushright}
+		%\includegraphics[width=1.7cm]{../pic/FHAC.jpg}
+	%\end{flushright}
+
+	%\vspace{5cm}
+
+	% Kopfzeile mit Fachbereich ...
+	\centering \bfseries \Large FH~Aachen \\
+	\vspace{0.5cm}
+	\normalsize Fachbereich\\
+	Maschinenbau~und~Mechatronik \\
+	Studiengang~Produktentwicklung
+
+	\vspace{1cm}
+
+	\centering \bfseries Masterarbeit
+
+	\vspace{0.8cm}
+
+	%Titel der Arbeit
+	\centering \begin{minipage}[t]{17cm}
+		\centering \bfseries \large Der~Titel~der~Arbeit\\ ist~zweizeilig
+		\medskip
+	\end{minipage}
+
+	\vspace{1.5cm}
+
+	%Name und Matrikelnummer
+	%\vspace*{1cm}
+	%\hspace*{6.8cm}
+	\begin{minipage}[t]{9cm}
+		\centering Vorname Nachname \\ Matr.-Nr.: 123456
+	\end{minipage}
+
+	\vspace{2.1cm}
+
+	%Professor und Betreuer
+	%\vspace*{4.7cm}
+	%\hspace*{6.8cm}
+	\centering \begin{minipage}[t]{9cm}
+		\centering \begin{tabular}{ll}
+			Referent: & Prof. Dr.-Ing. ...\\
+			Korreferent: & Prof. Dr.-Ing. ...\\
+			%Externer Betreuer: & Dipl.-Wirt.-Ing\\
+		\end{tabular}
+	\end{minipage}
+
+	\vspace{7cm}
+
+	% Firmenlogo
+	%\begin{flushleft}
+	%\centering \hspace{-8cm}
+	%\begin{minipage}[t]{5cm}
+			%\includegraphics[width=5cm]{./pic/firmenlogo.jpg}
+	%\end{minipage}
+	%\end{flushleft}
+
+
+	%Erstellungsdatum
+	%\vspace{-4cm}
+	%\begin{flushright}
+	\centering %\hspace{8cm}
+	\begin{minipage}[b]{5cm}
+			\centering
+			\today\\ %Datum\\
+			%\vspace{1cm}
+			%In Zusammenarbeit mit\\
+			%Firma, Ort\\
+			%\vspace{1cm}
+			%vertraulich bis xx.xx.xx
+	\end{minipage}
+	%\end{flushright}
+
+	%\today
+	\restoregeometry
+\end{titlepage}
+\end{document}

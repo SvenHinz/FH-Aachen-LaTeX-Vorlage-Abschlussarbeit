@@ -1,0 +1,205 @@
+% LaTeX-Vorlage zur Erstellung von Abschlussarbeiten an der FH Aachen
+% Author: Sven Hinz
+
+\documentclass[12pt,a4paper]{scrreprt}
+
+% Paket für Umlaute:
+\usepackage[utf8]{inputenc}       % Cross Platform
+%\usepackage[ansinew]{inputenc}   % Windows
+%\usepackage[latin1]{inputenc}    % Linux
+%\usepackage[applemac]{inputenc}  % Mac
+
+\usepackage[ngerman]{babel}       % Sprache: deutsch
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{kpfonts}
+\usepackage[left=2cm,right=2cm,top=2.5cm,bottom=2.5cm]{geometry}
+
+\author{Sven Hinz} % --> Eigenen Namen einfügen
+
+\usepackage[plainheadsepline,headsepline]{scrpage2}
+\usepackage{color}
+\usepackage{setspace}
+\usepackage[numbers,square]{natbib}
+\usepackage{longtable}
+\usepackage{listings}
+\usepackage{rotating}
+\usepackage{pdfpages}
+\usepackage{caption}
+\usepackage{subcaption}
+\parindent 0pt
+\usepackage{booktabs}
+\usepackage[export]{adjustbox}
+
+
+% Schriftart
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\setkomafont{chapter}{\sffamily \large}
+\setkomafont{section}{\sffamily \normalsize}
+\setkomafont{subsection}{\sffamily \normalsize}
+\setkomafont{subsubsection}{\sffamily \normalsize}
+\addtokomafont{caption}{\sffamily \small}
+\usepackage{courier}
+
+% Abstand zwischen Kopfzeile und Kapitelüberschrift
+\renewcommand*{\chapterheadstartvskip}{\vspace*{-0.75\baselineskip}}
+
+% Einstellungen der Kopf- und Fußzeile
+\pagestyle{scrheadings}
+\ihead[\sffamily \bfseries \upshape \headmark]{\sffamily \bfseries \upshape \headmark}
+\chead[]{}
+\ohead[]{}
+\ifoot[]{}
+\cfoot[]{}
+\ofoot[\sffamily \pagemark]{\sffamily \pagemark}
+\automark[]{chapter}
+\renewcommand*{\chapterheadendvskip}{\vspace*{1\baselineskip}}
+
+% Formeln
+\usepackage{fleqn} % linksbündig
+\setlength{\mathindent}{1.5cm} % Einrücktiefe
+
+% Tabellen
+\usepackage{multirow} % mehrzeiliger Text in einer Spalte
+\renewcommand{\arraystretch}{2} % Zeilenabstand vergrößern
+\setlength{\doublerulesep}{0.1mm} % Abstand der Doppellinien verkleinern
+\usepackage{tabu}
+\newcolumntype{C}{>{\centering\arraybackslash$}p{3cm}<{$}}
+
+% Quellcode / Kommandozeileneingabe
+\lstdefinestyle{BashInputStyle}{
+  language=bash,
+  basicstyle=\small\ttfamily,
+  %numbers=left,
+  %numberstyle=\tiny,
+  %numbersep=3pt,
+  frame=tb,
+  columns=fullflexible,
+  %backgroundcolor=\color{yellow!20},
+  linewidth=0.9\linewidth,
+  xleftmargin=0.1\linewidth
+}
+
+% Inhalt
+\renewcaptionname{ngerman}{\contentsname}{Inhalt} % Umbenennung in Inhalt
+
+% Quellenverzeichnis
+\renewcaptionname{ngerman}{\bibname}{Quellenverzeichnis} % Umbenennung in Quellenverzeichnis
+
+\usepackage[
+  tocindentmanual,
+  tocflat,
+  tocbreaksstrict,
+  toctextentriesleft,
+]{tocstyle}
+
+% Abkürzungsverzeichnis
+%\usepackage[intoc]{nomencl}
+%\let\abbrev\nomenclature
+%\renewcommand{\nomname}{Abkürzungsverzeichnis}
+%\setlength{\nomlabelwidth}{.25\hsize}
+%\renewcommand{\nomlabel}[1]{#1 \dotfill}
+%\setlength{\nomitemsep}{-\parsep}
+%\makenomenclature
+
+\usepackage[]{acronym}
+
+\begin{document}
+\setstretch{1.25}
+\addtocontents{toc}{\linespread{1}}
+
+% Einbinden der Textinhalte mit '\include{...}'
+% Die Dateien mit den Textinhalten befinden sich im Ordner 'doc'
+
+\include{./doc/001titelblatt}
+
+\include{./doc/002erklaerung}
+
+%\include{./doc/003danksagung}
+
+% Inhaltsverzeichnis
+\clearpage
+\makeatletter
+\renewcommand*{\@dotsep}{1} % Punktabstand einstellen
+\makeatother
+\tableofcontents
+
+% Das erste Kapitel soll auf einer ungeraden Seite beginnen.
+\cleardoublepage
+\setstretch{1.25}
+
+% Nicht benötigte Kapitel können auskommentiert werden
+% Für zusätzliche Kapitel müssen weitere Dateien im Ordner 'doc' angelegt werden
+
+\include{./doc/101kap1} % Einleitung
+\include{./doc/102kap2}
+\include{./doc/103kap3}
+\include{./doc/104kap4}
+\include{./doc/105kap5}
+\include{./doc/106kap6}
+\include{./doc/107kap7}
+\include{./doc/108kap8}
+\include{./doc/109kap9}
+\include{./doc/110kap10}
+\include{./doc/111kap11}
+
+% Nachspann
+\nocite{waermeatlas} % Quelle wird nicht im Text erwähnt -> Quellenverzeichnis
+\nocite{dubbel2005}
+% Weitere quellen müssen in 'bib/quellen.bib' eingetragen werden
+% !!! -> BibTex ausführen! Sonst tauchen die Quellen nicht im Verzeichnis auf.
+
+% Quellenverzeichnis
+\clearpage
+\bibliographystyle{unsrtdin}
+\bibliography{./bib/quellen}
+\addcontentsline{toc}{chapter}{Quellenverzeichnis}
+%\addtocontents{toc}{\vspace{0.8cm}}
+
+% Abkürzungsverzeichnis
+\clearpage
+\markright{Abkürzungsverzeichnis}
+\include{./doc/202abkuerzungsverzeichnis}
+%\addtocontents{toc}{\vspace{0.8cm}}
+
+% Abbildungsverzeichnis
+\clearpage
+\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+\listoffigures
+%\addtocontents{toc}{\vspace{0.8cm}}
+
+% Tabellenverzeichnis
+\clearpage
+\addcontentsline{toc}{chapter}{Tabellenverzeichnis}
+\listoftables
+\addtocontents{toc}{\vspace{0.8cm}}
+
+% Anhaenge
+\addcontentsline{toc}{chapter}{Anhang}
+\appendix
+%\input{./app/Dateiname}
+\chapter{Datenblätter}
+\begin{enumerate}
+      \item Datenblatt 1
+      \item Datenblatt 2
+\end{enumerate}
+
+% Anhänge im Ordner 'app' ablegen
+
+%\includepdf[pages=1-4]{./app/Datenblatt1.pdf} % Datei mit 4 Seiten
+%\includepdf[pages=1]{./app/Datenblatt2.pdf} % Datei mit einer Seite
+
+\chapter{Konstruktionszeichnungen}
+\begin{enumerate}
+      \item Seitenansicht
+      \item Draufsicht
+\end{enumerate}
+%\includepdf[pages=1]{./app/Seitenansicht.pdf}
+%\includepdf[pages=1]{./app/Draufsicht.pdf}
+
+\end{document}
